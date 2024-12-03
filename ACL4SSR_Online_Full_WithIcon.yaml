@@ -1,3 +1,168 @@
+#------------------锚点复用---------------
+#已写入防止dns泄露
+#多ip指定
+#meta核心
+proxy-providers-dingyue: &airports
+
+  泡泡云:
+    type: http
+    interval: 3600
+    path: ./泡泡云.yaml 
+    url:  https://1821.nginx24ppy.xyz/link/kySLStKTpSimjajb?clash=1
+    exclude-filter: "倍率|剩余|流量|套餐|到期|官网|订阅"
+    health-check:
+      enable: true
+      url: https://www.google.com/generate_204
+      interval: 900
+      lazy: true
+
+  xmrth:
+    type: http
+    interval: 3600
+    path: ./xmrth.yaml
+    url:  https://cdn2.xmrth.one/s/twPVye3NGztX2uIP?clash=2
+    exclude-filter: "-10倍|剩余|流量|套餐|到期|官网|订阅"
+    health-check:
+      enable: true
+      url: https://www.google.com/generate_204
+      interval: 900
+      lazy: true
+      
+  红杏加速器:   
+    type: http
+    interval: 3600
+    path: ./红杏加速器.yaml 
+    url:  https://hongxingdl.com/hxvip?token=e3ad70541fbaa9ea05bb2007dead47c1
+    exclude-filter: "-10倍|剩余|流量|套餐|到期|官网|订阅"
+    health-check:
+      enable: true
+      url: https://www.google.com/generate_204
+      interval: 900
+      lazy: true
+
+proxy-providers-config:
+  proxy-providers-use: &proxy-providers-use
+    - 泡泡云
+    - xmrth
+    - 红杏加速器
+
+
+# 策略组相关
+pr: &pr
+  proxies:  #添加节点名字
+
+
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: :9090
+ipv6: true
+geo-auto-update: true #false&true  是否自动更新GEO
+geo-update-interval: 24  #更新间隔，单位小时
+geox-url:
+  geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat"
+  geosite: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat"
+  mmdb: "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/Country.mmdb"
+experimental:  #实验性功能
+  ignore-resolve-fail: true #忽略DNS解析失败true&false
+dns:
+  enable: true
+  prefer-h3: true
+  listen: 0.0.0.0:53
+  ipv6: true
+  default-nameserver: #用于解析DNS服务器域名
+    - 223.5.5.5
+    - 9.9.9.10
+    - 149.112.112.10
+    - 119.29.29.29
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  #fake-ip-filter:  #指定不适用fakeip的域名
+    #- '*.qq.com'
+    #- baidu.com
+  #nameserver-policy:  #为以下域名指定DNS服务器
+    #'www.baidu.com': '114.114.114.114'
+    #'+.internal.crop.com': '10.0.0.1'
+    #'geosite:cn': https://doh.pub/dns-query
+  nameserver:
+    #- 192.168.36.108:533
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    #- 192.168.36.108:534
+    - https://1.1.1.1/dns-query
+    - https://1.0.0.1/dns-query
+    - https://45.11.45.11/dns-query
+    - https://dns.quad9.net/dns-query
+    - tls://dns.quad9.net
+    - tls://1.1.1.1
+    - 8.8.8.8
+    - 8.8.4.4
+    - 1.1.1.1
+    #- https://doh.apad.pro/cdn-query
+  proxy-server-nameserver:   #代理节点域名解析服务器，仅用于解析代理节点的域名
+    #- https://doh.pub/dns-query
+    #- https://dns.alidns.com/dns-query
+    - https://1.0.0.1/dns-query
+    - https://45.11.45.11/dns-query
+    - https://dns.quad9.net/dns-query
+    - tls://dns.quad9.net
+    - https://1.1.1.1/dns-query
+    - tls://1.1.1.1
+    - 8.8.8.8
+    - 8.8.4.4
+    - 1.1.1.1
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    #可选值为 国家缩写，默认值为 CN
+    #除了 geoip-code 配置的国家 IP, 其他的 IP 结果会被视为污染
+    #geoip-code 配置的国家的结果会直接采用，否则将采用 fallback结果
+    geosite:
+    #geosite 列表的内容被视为已污染，匹配到 geosite 的域名，将只使用 fallback解析，不去使用
+      - gfw
+    ipcidr:
+    #这些网段的结果会被视为污染，nameserver解析出这些结果时将会采用 fallback的解析结果
+      - 240.0.0.0/4
+    domain:  #以下域名只使用fallback请求IP
+    #这些域名被视为已污染，匹配到这些域名，会直接使用 fallback解析，不去使用 nameserver
+      - '+.google.com'
+      - '+.googlesyndication.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
+      - '+.x.com'
+      - '+.apple.com'
+      - '+.javbus22.com'
+      - '+.jads.co'
+      - '+.api.io.mi.com'
+      - '+.icloud.com'
+      - '+.lnaspiring.com'
+      - '+.cloudflare.com'
+      - '+.coo.wiki'
+      - '+.ip.sb'
+      - '+.doubleclick.net'
+      - '+.amazonaws.com'
+      - '+.cloudfront.net'
+      - '+.openwrt.org'
+      - '+.googleadservices.com'
+      - '+.koolcenter.com'
+      - '+.ghproxy.com'
+      - '+.knjc.cfd'
+      - '+.xiaoya.pro'
+      - '+.lwjyj.com'
+      - '+.vpdmm.cc'
+      - '+.ac.jp'
+      - '+.my-netdata.io'
+      - '+.appcenter.ms'
+      - 'vl.justloli.cn'
+      - '3kloli.justloli.cn'
+      - '+.hotloli.cloudns.org'
+
+proxy-providers: *airports
+
+proxies: #节点添加到这里
 proxy-groups:
   - name: 节点选择
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png
