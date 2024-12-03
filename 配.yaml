@@ -394,10 +394,10 @@ proxy-groups:
 - {name: 🍎 Apple, type: select, proxies: [ ♻️ 香港自动, ♻️ 香港自动A, ♻️ 香港自动B, ♻️ 香港自动C, ♻️ 台湾自动, ♻️ 新加坡自动, ♻️ 日本自动, ♻️ 美国自动, 🚀 节点选择, ♻️ 自动选择, DIRECT]}
 - {name: 🐟 漏网之鱼, type: select, proxies: [ ♻️ 香港自动, ♻️ 香港自动A, ♻️ 香港自动B, ♻️ 香港自动C, ♻️ 台湾自动, ♻️ 新加坡自动, ♻️ 日本自动, ♻️ 美国自动, 🚀 节点选择, ♻️ 自动选择, DIRECT]}
 - {name: All, type: select, include-all: true}
-- {name: ♻️ 香港自动, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(港|官网|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
-- {name: ♻️ 香港自动A, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(🇭🇰 香港|官网|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
-- {name: ♻️ 香港自动B, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(香港0官网|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
-- {name: ♻️ 香港自动C, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(香港30|香港50|IPV6 香港|官网|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
+- {name: ♻️ 香港自动, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(港|官网|(?i)Hong))^((?!(台|日|韩|新|深|美|官网)).)*$"}
+- {name: ♻️ 香港自动A, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(🇭🇰 香港|(?i)Hong))^((?!(台|日|韩|新|深|美|官网)).)*$"}
+- {name: ♻️ 香港自动B, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(香港0|(?i)Hong))^((?!(台|日|韩|新|深|美|官网)).)*$"}
+- {name: ♻️ 香港自动C, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(香港30|香港50|IPV6 香港|(?i)Hong))^((?!(台|日|韩|新|深|美|官网)).)*$"}
 - {name: ♻️ 台湾自动, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(台|新北|彰化|Taiwan))^((?!(港|日|韩|新|深|美)).)*$"}
 - {name: ♻️ 新加坡自动, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(新加坡|坡|狮城|Singapore))^((?!(台|日|韩|港|深|美)).)*$"}
 - {name: ♻️ 美国自动, !!merge <<: *pg_ut, include-all: true, filter: "(?=.*(美|(?i)States|America))^((?!(港|台|日|韩|新)).)*$"}
