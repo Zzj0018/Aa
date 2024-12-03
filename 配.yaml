@@ -411,7 +411,6 @@ rule-providers:
   geolocation-!cn: {!!merge <<: *domain_mrs, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
   cn_site: {!!merge <<: *domain_mrs, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
   cn_ip: {!!merge <<: *ip_mrs, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
-  AWAvenue: {!!merge <<: *domain_yaml, url: "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/refs/heads/main/Filters/AWAvenue-Ads-Rule-Clash.yaml"}
   
   # Classical 格式文件
   # https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash
@@ -441,7 +440,6 @@ rules:
 - RULE-SET,telegram_domain,📲 Telegram
 - RULE-SET,netflix_domain,🎥 NETFLIX
 - RULE-SET,apple_domain,🍎 Apple
-- RULE-SET,AWAvenue,REJECT
 - RULE-SET,geolocation-!cn,🚀 节点选择
 - DOMAIN-SUFFIX,cn,DIRECT
 - RULE-SET,cn_site,DIRECT
