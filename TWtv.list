@@ -9,13 +9,13 @@ DOMAIN-KEYWORD,litv
 DOMAIN-SUFFIX,fetnet.net
 DOMAIN-SUFFIX,akamaized.net
 DOMAIN-KEYWORD,akamaized
+
 # Ofiii
 DOMAIN-SUFFIX,ofiii.com
 DOMAIN-SUFFIX,cdn.ofiii.com
 DOMAIN-KEYWORD,ofiii
 IP-CIDR,13.0.0.0/8,no-resolve
-RULE-SET,tw_media
-RULE-SET,streaming
+
 # friDay影音
 DOMAIN-SUFFIX,video.friday.tw
 DOMAIN-SUFFIX,friday.tw
@@ -23,4 +23,3 @@ DOMAIN-SUFFIX,cdn.friday.tw
 DOMAIN-KEYWORD,friday
 IP-CIDR,13.224.0.0/14,no-resolve
 IP-CIDR,54.230.0.0/16,no-resolve
-RULE-SET,tw_media
